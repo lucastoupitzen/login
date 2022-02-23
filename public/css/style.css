@@ -167,3 +167,26 @@ main {
         width: 90%;
     }
 }
+
+.loading {
+    border: 6px solid var(--cor6);
+    border-top-color: var(--cor4);
+    border-bottom-color: var(--cor3);
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    animation: is-rotating 1s infinite;
+    display: none;
+}
+
+@keyframes is-rotating {
+    to {
+      transform: rotate(1turn);
+    }
+} 
+
+.resposta {
+    display: none;
+    color: var(--cor4);
+    font-size: 15pt;
+}
