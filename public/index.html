@@ -18,17 +18,22 @@
                 <h1>LOGIN</h1>
                 <div class="textfield">
                     <label for="usuario">Usuário</label>
-                    <input type="text" name="usuario" placeholder="Usuário">
+                    <input type="text" class="usuario" name="usuario" placeholder="Usuário">
                 </div>
                 <div class="textfield">
                     <label for="senha">Senha</label>
-                    <input type="password" name="senha" placeholder="Senha">
+                    <input type="password" class="senha" name="senha" placeholder="Senha">
                 </div>
                 <button class="btn-login">Login</button>
-                <p>Ainda não possui uma conta? <a href="">Cadastre-se aqui!</a></p>
-                <p>Esqueceu sua senha? <a href="">Clique aqui.</a></p>
+                <div class="resposta"></div>
+                <div class="loading"></div>
+                <p class="texto-extra">Ainda não possui uma conta? <a href="">Cadastre-se aqui!</a></p>
+                <p class="texto-extra">Esqueceu sua senha? <a href="">Clique aqui.</a></p>
+                
             </div>
         </div>
     </main>
 </body>
+<script src="./js/jquery.js"></script>
+<script src="./js/main.js"></script>
 </html>

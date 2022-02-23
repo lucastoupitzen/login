@@ -7,9 +7,8 @@ module.exports = () => {
 
     app.use(express.static('../public'))
 
-    app.use(bodyParser.urlencoded({extended: true}))
-
     app.use(bodyParser.json())
+    app.use(bodyParser.urlencoded({extended: true}))
 
     consign().include("routes").into(app)
 

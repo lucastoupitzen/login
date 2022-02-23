@@ -4,22 +4,23 @@ const Autenticação = require("../methods/Autenticação.js")
 class Metodos{
 
     buscar(email, senha, res){
-
+        
         const sql = `SELECT * FROM Login WHERE email="${email}"`
 
-        conexao.query(sql, function (erro, resultado) {
+        conexao.query(sql, (erro, resultado) => {
             if(erro){
-                res.status(400)
-                res.send(erro)
+                res.send("Tente novamente")
             } else{
+                if(resultado.length == 0){
+                    res.send("Tente novamente")
+                }else{
+                    
+                    const login = resultado[0].senha
 
-                const login = resultado[0].senha
-
-                Autenticação.init(senha, login, res)
+                    Autenticação.init(senha, login, res)}
                 
             }
         })
-
 
 
     }
