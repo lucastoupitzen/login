@@ -2,9 +2,13 @@
 
 class Autenticação{
 
-    init(tentativa, certo, res){
+    init(tentativa, certo, nome, res){
         if(tentativa == certo){
-            res.send("Sucesso ao logar")
+            const dadosResposta = {
+                nome,
+                status: "Sucesso ao logar"
+            }
+            res.send(dadosResposta)
         } else {
             res.send("Senha incorreta, tente novamente")
         }
