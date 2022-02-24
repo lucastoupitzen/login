@@ -12,38 +12,60 @@ class Metodos{
                 res.send("Tente novamente")
             } else{
                 if(resultado.length == 0){
-                    res.send("Tente novamente")
+                    res.send("Email não cadastrado")
                 }else{
                     
                     const login = resultado[0].senha
 
-                    Autenticação.init(senha, login, res)}
+                    const nome = resultado[0].nome
+
+                    Autenticação.init(senha, login, nome, res)}
                 
             }
         })
 
-
+        return
     }
 
     cadastrar(nome,email,senha,res){
 
-        const sql = `INSERT INTO Login SET ?`
+        //verificar email já existente
+        const sql1 = `SELECT * FROM Login WHERE email="${email}"`
 
-        let lista = {
-            'nome': nome,
-            "email": email,
-            "senha": senha
-        }
-
-        conexao.query(sql,lista, (erro, resultado) => {
+        conexao.query(sql1, (erro, resultado) => {
             if(erro){
-                res.status(400)
-                res.send(erro)
-            } else {
-                res.send(resultado)
+                res.send("Erro no servidor")
+            }else{
+                if(resultado.length == 0 ){
+                    const sql = `INSERT INTO Login SET ?`
+
+                    let lista = {
+                        'nome': nome,
+                        "email": email,
+                        "senha": senha
+                    }
+            
+                    conexao.query(sql,lista, (erro, resultado) => {
+                        if(erro){
+                            res.status(400)
+                            res.send("Erro ao cadastrar")
+                        } else {
+                            const dadosResposta = {
+                                nome,
+                                status: "Sucesso ao cadastrar"
+                            }
+                            res.send(dadosResposta)
+                        }
+                    })
+                } else {
+                    res.send("Email já cadastrado")
+                } 
             }
         })
-    }
+
+
+    } 
+    
 
     corrigirSenha(email, novaSenha, res){
 
@@ -59,6 +81,7 @@ class Metodos{
         })
 
     }
+
 }
 
 module.exports = new Metodos

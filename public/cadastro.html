@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/stylecadastro.css">
+</head>
+<body>
+    <main>
+        <div class = "left-login">
+            <h1>Faça seu cadastro!<br></h1>
+            <img src="imagem/Hand coding-bro.svg" alt="imagem">
+        </div>
+        <div class="right-login">
+            <div class="card-login">
+                <h1>CADASTRE-SE</h1>
+                <div class="textfield">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="nome" name="nome" placeholder="Nome">
+                </div>
+                <div class="textfield">
+                    <label for="email">Email</label>
+                    <input type="text" class="email" name="email" placeholder="Email">
+                </div>
+                <div class="textfield">
+                    <label for="senha">Senha</label>
+                    <input type="password" class="senha" name="senha" placeholder="Senha (8 caracteres no mínimo)">
+                </div>
+                <div class="textfield">
+                    <label for="confimar-senha">Confirme a senha</label>
+                    <input type="password" class="confimar-senha" name="confimar-senha" placeholder="Confirme sua senha">
+                </div>
+                <button class="btn-login">Enviar</button>
+                <div class="resposta"></div>
+                <div class="loading"></div>
+                
+            </div>
+        </div>
+    </main>
+</body>
+<script src="./js/jquery.js"></script>
+<script src="./js/cadastro.js"></script>
+</html>
