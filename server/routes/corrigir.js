@@ -6,8 +6,6 @@ module.exports = app => {
 
         const parametros = req.body
 
-        console.log(parametros)
-
         Metodos.corrigirSenha(parametros.email, parametros.senha, res)
     })
 }

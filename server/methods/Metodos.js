@@ -9,7 +9,7 @@ class Metodos{
 
         conexao.query(sql, (erro, resultado) => {
             if(erro){
-                res.send("Tente novamente")
+                res.send("Erro no servidor")
             } else{
                 if(resultado.length == 0){
                     res.send("Email não cadastrado")
@@ -23,8 +23,6 @@ class Metodos{
                 
             }
         })
-
-        return
     }
 
     cadastrar(nome,email,senha,res){
@@ -36,13 +34,14 @@ class Metodos{
             if(erro){
                 res.send("Erro no servidor")
             }else{
+                // se o email ainda não foi cadastrado
                 if(resultado.length == 0 ){
                     const sql = `INSERT INTO Login SET ?`
 
                     let lista = {
-                        'nome': nome,
-                        "email": email,
-                        "senha": senha
+                        nome,
+                        email,
+                        senha
                     }
             
                     conexao.query(sql,lista, (erro, resultado) => {
@@ -58,6 +57,7 @@ class Metodos{
                         }
                     })
                 } else {
+                    // se o email já estava cadastrado
                     res.send("Email já cadastrado")
                 } 
             }
@@ -65,7 +65,7 @@ class Metodos{
 
 
     } 
-    
+
 
     corrigirSenha(email, novaSenha, res){
 

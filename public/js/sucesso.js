@@ -17,7 +17,8 @@ function atualizaNomeLogado() {
 
 function filtraNome(nomeLogado) {
 
-
+    // pega apenas o primeiro nome do usuário
+    
     let lista = []
     for(i=0; i <= nomeLogado.length; i++){
 
