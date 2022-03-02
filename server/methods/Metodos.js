@@ -1,11 +1,14 @@
 const conexao = require("../databaseConfig/conexao.js")
 const Autenticação = require("../methods/Autenticação.js")
+const SenhaSegura = require("../methods/criarSenha.js")
 
 class Metodos{
 
     buscar(email, senha, res){
         
         const sql = `SELECT * FROM Login WHERE email="${email}"`
+
+        senha = SenhaSegura.hash(senha)
 
         conexao.query(sql, (erro, resultado) => {
             if(erro){
@@ -29,6 +32,8 @@ class Metodos{
 
         //verificar email já existente
         const sql1 = `SELECT * FROM Login WHERE email="${email}"`
+
+        senha = SenhaSegura.hash(senha)
 
         conexao.query(sql1, (erro, resultado) => {
             if(erro){
@@ -68,6 +73,8 @@ class Metodos{
 
 
     corrigirSenha(email, novaSenha, res){
+
+        novaSenha = SenhaSegura.hash(senha)
 
         const sql = `UPDATE Login SET senha = "${novaSenha}" WHERE email = "${email}"`
 
