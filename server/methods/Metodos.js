@@ -4,11 +4,11 @@ const SenhaSegura = require("../methods/criarSenha.js")
 
 class Metodos{
 
-    buscar(email, senha, res){
+    async buscar(email, senha, res){
         
-        const sql = `SELECT * FROM Login WHERE email="${email}"`
+        const sql = `SELECT * FROM Logindef WHERE email="${email}"`
 
-        senha = SenhaSegura.hash(senha)
+        // const senhaHash = await SenhaSegura.criarHash(senha)
 
         conexao.query(sql, (erro, resultado) => {
             if(erro){
@@ -22,18 +22,19 @@ class Metodos{
 
                     const nome = resultado[0].nome
 
-                    Autenticação.init(senha, login, nome, res)}
+                    Autenticação.comparar(senha, login, nome, res)
+                }
                 
             }
         })
     }
 
-    cadastrar(nome,email,senha,res){
+    async cadastrar(nome,email,senha,res){
 
         //verificar email já existente
-        const sql1 = `SELECT * FROM Login WHERE email="${email}"`
+        const sql1 = `SELECT * FROM Logindef WHERE email="${email}"`
 
-        senha = SenhaSegura.hash(senha)
+        const senhaHash = await SenhaSegura.criarHash(senha)
 
         conexao.query(sql1, (erro, resultado) => {
             if(erro){
@@ -41,12 +42,12 @@ class Metodos{
             }else{
                 // se o email ainda não foi cadastrado
                 if(resultado.length == 0 ){
-                    const sql = `INSERT INTO Login SET ?`
+                    const sql = `INSERT INTO Logindef SET ?`
 
                     let lista = {
                         nome,
                         email,
-                        senha
+                        senha: senhaHash
                     }
             
                     conexao.query(sql,lista, (erro, resultado) => {
@@ -72,11 +73,11 @@ class Metodos{
     } 
 
 
-    corrigirSenha(email, novaSenha, res){
+    async corrigirSenha(email, novaSenha, res){
 
-        novaSenha = SenhaSegura.hash(senha)
+        const novaSenhaHash = await SenhaSegura.criarHash(senha)
 
-        const sql = `UPDATE Login SET senha = "${novaSenha}" WHERE email = "${email}"`
+        const sql = `UPDATE Logindef SET senha = "${novaSenhaHash}" WHERE email = "${email}"`
 
         conexao.query(sql, (erro, resultado) => {
             if(erro) {

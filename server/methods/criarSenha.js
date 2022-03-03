@@ -2,14 +2,14 @@ const bcrypt = require("bcrypt")
 
 class SenhaSegura {
 
-    hash(senha) {
+    async criarHash(senha) {
 
-        custoHash = 12
-        const novaSenha = bcrypt.hash(senha, custoHash)
+        const custoHash = 12
+        const novaSenha = await bcrypt.hash(senha, custoHash)
 
         return novaSenha
-
     }
+
 
 }
 
